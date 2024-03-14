@@ -155,7 +155,7 @@ sds sdsMakeRoomFor(sds s, size_t addlen) {
   if (oldtype == type) {
     /* 如果旧类型等于新类型,那就在原有的空间上追加空间*/
     newsh = s_realloc(sh, hdrlen + newlen + 1);
-    if (newlen == NULL) return NULL;
+    if (newlen == 0) return NULL;
     s = (char *) newsh + hdrlen;
   } else {
     /* Since the header size changes, need to move the string forward,
