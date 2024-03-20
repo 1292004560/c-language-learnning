@@ -3,11 +3,11 @@
 
 using namespace std;
 
-namespace Records {
+namespace Records
+{
 
-  Employee::Employee(const std::string & firstName, const std::string & lastName): mFirstName(firstName), mLastName(lastName)
+  Employee::Employee(const std::string &firstName, const std::string &lastName) : mFirstName(firstName), mLastName(lastName)
   {
-
   }
 
   void Employee::promote(int raiseAccount)
@@ -30,19 +30,17 @@ namespace Records {
     mHired = false;
   }
 
-
   void Employee::display() const
   {
-    cout << "Hello world"<< getLastName() << getFirstName();
+    cout << "Hello world" << getLastName() << getFirstName();
   }
 
-
-  void Employee::setFirstName(const string & firstName)
+  void Employee::setFirstName(const string &firstName)
   {
     mFirstName = firstName;
   }
 
-  const string& Employee::getFirstName() const
+  const string &Employee::getFirstName() const
   {
     return mFirstName;
   }
