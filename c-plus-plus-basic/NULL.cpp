@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <stdio.h>
 void func(char * str)
 {
   std::cout << "char * version" << std::endl;

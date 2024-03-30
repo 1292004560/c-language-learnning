@@ -11,6 +11,7 @@ int main(int argc, char *argv[])
 
   printf("enter a number: ");
 
+
   scanf("%d", &n);
 
   printf("enter a string : ");
