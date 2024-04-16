@@ -21,6 +21,7 @@ class MyFunction {
 public:
   int operator()(int x, int y) { return x + y; }
 };
+
 int main(int argc, char *argv[]) {
 
   func fp = print1;
