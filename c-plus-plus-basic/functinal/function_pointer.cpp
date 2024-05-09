@@ -2,27 +2,31 @@
 #include <iostream>
 typedef int (*func)();
 
-int print1() {
+int print1()
+{
 
   printf("hello world");
 
   return 0;
 }
 
-int print2() {
+int print2()
+{
 
   printf("hello printf2 \n");
 
   return 0;
 }
 
-class MyFunction {
+class MyFunction
+{
 
 public:
   int operator()(int x, int y) { return x + y; }
 };
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
 
   func fp = print1;
   fp();

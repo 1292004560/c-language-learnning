@@ -19,7 +19,8 @@ static void conn_writecb(struct bufferevent *, void *);
 static void conn_eventcb(struct bufferevent *, short, void *);
 static void signal_cb(evutil_socket_t, short, void *);
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
   struct event_base *base;
   struct evconnlistener *listener;
   struct event *signal_event;
@@ -27,7 +28,8 @@ int main(int argc, char **argv) {
   struct sockaddr_in sin;
 
   base = event_base_new();
-  if (!base) {
+  if (!base)
+  {
     fprintf(stderr, "Could not initialize libevent!\n");
     return 1;
   }
@@ -40,14 +42,16 @@ int main(int argc, char **argv) {
                                      LEV_OPT_REUSEABLE | LEV_OPT_CLOSE_ON_FREE,
                                      -1, (struct sockaddr *)&sin, sizeof(sin));
 
-  if (!listener) {
+  if (!listener)
+  {
     fprintf(stderr, "Could not create a listener!\n");
     return 1;
   }
 
   signal_event = evsignal_new(base, SIGINT, signal_cb, (void *)base);
 
-  if (!signal_event || event_add(signal_event, NULL) < 0) {
+  if (!signal_event || event_add(signal_event, NULL) < 0)
+  {
     fprintf(stderr, "Could not create/add a signal event!\n");
     return 1;
   }
@@ -64,12 +68,14 @@ int main(int argc, char **argv) {
 
 // 监听回调函数
 static void listener_cb(struct evconnlistener *listener, evutil_socket_t fd,
-                        struct sockaddr *sa, int socklen, void *user_data) {
+                        struct sockaddr *sa, int socklen, void *user_data)
+{
   struct event_base *base = user_data;
   struct bufferevent *bev;
 
   bev = bufferevent_socket_new(base, fd, BEV_OPT_CLOSE_ON_FREE);
-  if (!bev) {
+  if (!bev)
+  {
     fprintf(stderr, "Error constructing bufferevent!");
     event_base_loopbreak(base);
     return;
@@ -82,9 +88,11 @@ static void listener_cb(struct evconnlistener *listener, evutil_socket_t fd,
 }
 
 // 写缓冲区回调
-static void conn_writecb(struct bufferevent *bev, void *user_data) {
+static void conn_writecb(struct bufferevent *bev, void *user_data)
+{
   struct evbuffer *output = bufferevent_get_output(bev);
-  if (evbuffer_get_length(output) == 0) {
+  if (evbuffer_get_length(output) == 0)
+  {
     printf("flushed answer\n");
     bufferevent_free(bev);
   }
@@ -92,10 +100,14 @@ static void conn_writecb(struct bufferevent *bev, void *user_data) {
 
 // 事件回调
 static void conn_eventcb(struct bufferevent *bev, short events,
-                         void *user_data) {
-  if (events & BEV_EVENT_EOF) {
+                         void *user_data)
+{
+  if (events & BEV_EVENT_EOF)
+  {
     printf("Connection closed.\n");
-  } else if (events & BEV_EVENT_ERROR) {
+  }
+  else if (events & BEV_EVENT_ERROR)
+  {
     printf("Got an error on the connection: %s\n",
            strerror(errno)); /*XXX win32*/
   }
@@ -104,7 +116,8 @@ static void conn_eventcb(struct bufferevent *bev, short events,
   bufferevent_free(bev);
 }
 
-static void signal_cb(evutil_socket_t sig, short events, void *user_data) {
+static void signal_cb(evutil_socket_t sig, short events, void *user_data)
+{
   struct event_base *base = user_data;
   struct timeval delay = {2, 0};
 
