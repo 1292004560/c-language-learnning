@@ -25,6 +25,8 @@ int main(void) {
   lseek(fd, 0, SEEK_SET);
   read(fd, read_buffer, 100);
 
+  
+
   printf("read : %s\n", read_buffer);
 
   mmap_address = mmap(NULL, 4096, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
